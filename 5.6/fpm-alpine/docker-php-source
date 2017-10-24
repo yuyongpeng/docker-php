@@ -1,4 +1,6 @@
 #!/bin/sh
+# 解压php源码包到指定的目录 或 删除源码包
+
 set -e
 
 dir=/usr/src/php

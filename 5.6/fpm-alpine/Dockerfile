@@ -171,15 +171,15 @@ RUN set -xe \
 	&& apk del .build-deps \
 	\
 # https://github.com/docker-library/php/issues/443
-	&& pecl update-channels \
+	&& /usr/local/php/bin/pecl update-channels \
 	&& rm -rf /tmp/pear ~/.pearrc
 
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 
 # 扩展的安装
 ENV SRC_DIR /usr/src
-RUN	mkdir -p ${SRC_DIR}; \
-	cd ${SRC_DIR}; \
+RUN	mkdir -p ${SRC_DIR} \
+	cd ${SRC_DIR} \
 # OpenCC
 RUN apk add --no-cache --virtual .phpmodules-deps cmake g++ doxygen python2 \
 	&& wget -P ${SRC_DIR} -O opencc-1.0.4.tar.gz https://github.com/BYVoid/OpenCC/archive/ver.1.0.4.tar.gz \

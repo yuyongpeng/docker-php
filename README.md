@@ -18,3 +18,7 @@
 * php.ini路径：/usr/local/etc/php，需要上传
 * php.conf:  /usr/local/etc/php/conf.d
 * /usr/local/etc/php-fpm.conf
+* /usr/local/bin/php
+* /usr/local/bin/php-config
+* /usr/local/bin/phpize
+* /usr/local/sbin/php-fpm

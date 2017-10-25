@@ -132,7 +132,7 @@ RUN set -xe \
 		$PHP_EXTRA_CONFIGURE_ARGS \
 	&& make -j "$(nproc)" \
 	&& make install \
-	&& cp php.ini-production /usr/local/etc/php/php.ini \
+	&& cp php.ini-production ${PHP_INI_DIR}/php.ini \
 	&& { find /usr/local/bin /usr/local/sbin -type f -perm +0111 -exec strip --strip-all '{}' + || true; } \
 	&& make clean \
 	&& cd / \

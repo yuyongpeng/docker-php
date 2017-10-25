@@ -164,7 +164,7 @@ RUN apk add --no-cache --virtual .phpmodules-deps cmake g++ doxygen python make 
 	&& git clone https://github.com/NauxLiu/opencc4php.git \
 	&& cd opencc4php \
 	&& phpize \
-	&& ./configure --with-php-config=${docker-php-source}/php-config  \
+	&& ./configure --with-php-config=/usr/local/bin/php-config  \
 	&& make && make install \
 	&& apk del .phpmodules-deps
 # memcached
@@ -199,7 +199,7 @@ RUN apk add --no-cache --virtual .phpmodules-dep autoconf gcc g++ make pcre-dev 
 	&& tar zxvf yaf-2.3.5.tgz \
 	&& cd yaf-2.3.5 \
 	&& phpize \
-	&& ./configure --with-php-config=${PHP_PATH}/bin/php-config \
+	&& ./configure --with-php-config=/usr/local/bin/php-config \
 	&& make && make install \
 	&& apk del .phpmodules-deps
 

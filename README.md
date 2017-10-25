@@ -13,3 +13,8 @@
 * docker build -t php:alpine .
 * docker run -d php:alipine
 * docker exec -ti xxxxxxxx bash
+
+### 配置文件
+* php.ini路径：/usr/local/etc/php，需要上传
+* php.conf:  /usr/local/etc/php/conf.d
+* /usr/local/etc/php-fpm.conf

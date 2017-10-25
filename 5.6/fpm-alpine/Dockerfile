@@ -163,42 +163,44 @@ RUN apk add --no-cache --virtual .phpmodules-deps cmake g++ doxygen python make 
 	&& cd ${SRC_DIR} \
 	&& git clone https://github.com/NauxLiu/opencc4php.git \
 	&& cd opencc4php \
-	&& phpize \
+	&& /usr/local/bin/phpize \
+	\
 	&& ./configure --with-php-config=/usr/local/bin/php-config  \
-	&& make && make install \
-	&& apk del .phpmodules-deps
+	&& make && make install 
 # memcached
 RUN apk add --no-cache --virtual .phpmodules-dep memcached memcached-dev zlib zlib-dev \
 	&& pecl install memcache \
 	\
+	&& pwd
+
 # mongod
 RUN apk add --no-cache --virtual .phpmodules-dep autoconf gcc g++ make openssl openssl-dev \
 	&& pecl install mongo-1.6.11 \
 	\
-	&& apk del .phpmodules-deps
-
+	&& pwd
 # amqp 1.9.3
 RUN apk add --no-cache --virtual .phpmodules-dep autoconf gcc g++ make openssl openssl-dev \
 	&& wget -P ${SRC_DIR} https://github.com/alanxz/rabbitmq-c/releases/download/v0.8.0/rabbitmq-c-0.8.0.tar.gz \
+	&& cd ${SRC_DIR} \
 	&& tar zxvf rabbitmq-c-0.8.0.tar.gz \
 	&& cd rabbitmq-c-0.8.0 \
 	&&  ./configure --prefix=/usr/local/rabbitmq-c --enable-tools \
 	&& make && make install \
 	&& cd ${SRC_DIR} \
-	&& pecl dwonload amqp-1.9.3 \
+	&& pecl download amqp-1.9.3 \
 	&& tar zxvf amqp-1.9.3.tgz \
 	&& cd amqp-1.9.3 \
-	&& phpize \
+	&& /usr/local/bin/phpize \
 	&& ./configure --with-php-config=/usr/local/bin/php-config --with-librabbitmq-dir=/usr/local/rabbitmq-c \
-	&& make && make install \
-	&& apk del .phpmodules-deps
+	&& make && make install 
 
 # yaf 2.3.5
 RUN apk add --no-cache --virtual .phpmodules-dep autoconf gcc g++ make pcre-dev \
-	wget -P ${SRC_DIR} http://pecl.php.net/get/yaf-2.3.5.tgz \
+	&& wget -P ${SRC_DIR} http://pecl.php.net/get/yaf-2.3.5.tgz \
+	&& cd ${SRC_DIR} \
 	&& tar zxvf yaf-2.3.5.tgz \
 	&& cd yaf-2.3.5 \
-	&& phpize \
+	&& /usr/local/bin/phpize \
 	&& ./configure --with-php-config=/usr/local/bin/php-config \
 	&& make && make install \
 	&& apk del .phpmodules-deps

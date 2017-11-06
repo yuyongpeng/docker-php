@@ -18,6 +18,13 @@ ENV PHPIZE_DEPS \
 		pcre-dev \
 		pkgconf \
 		re2c
+
+# 添加中国的源
+RUN echo "https://mirrors.ustc.edu.cn/alpine/v3.4/main" > /etc/apk/repositories
+RUN echo "https://mirrors.ustc.edu.cn/alpine/v3.4/community" >> /etc/apk/repositories
+RUN apk update
+RUN apk add --no-cache bash
+
 RUN apk add --no-cache --virtual .persistent-deps \
 		ca-certificates \
 		curl \
@@ -82,7 +89,7 @@ RUN set -xe; \
 		for key in $GPG_KEYS; do \
 			gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
 		done; \
-		gpg --batch --verify php.tar.xz.asc php.tar.xz; \
+		#gpg --batch --verify php.tar.xz.asc php.tar.xz; \
 		rm -rf "$GNUPGHOME"; \
 	fi; \
 	\
